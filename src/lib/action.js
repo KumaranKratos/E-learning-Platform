@@ -21,11 +21,15 @@ export const updateCourseDetails = async (formData) => {
 
 export const updateUser = async (formData) => {
   const { fullName, bio, location } = formData;
-  connectToDb();
-  const user = await User.findById(process.env.DefaultUser);
-  user.name = fullName;
-  user.bio = bio;
-  user.location = location;
-  await user.save();
-  console.log(user);
+  try {
+    connectToDb();
+    const user = await User.findById(process.env.DefaultUser);
+    user.name = fullName;
+    user.bio = bio;
+    user.location = location;
+    await user.save();
+    revalidatePath("/profile");
+  } catch (err) {
+    console.log(err);
+  }
 };
