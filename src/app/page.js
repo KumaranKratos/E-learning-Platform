@@ -49,7 +49,7 @@ const Home = async () => {
         <div className="mt-10 w-full overflow-x-auto scrollbar-hide">
           <div className="flex gap-4 py-4">
             {courses.map((course) => (
-              <Link href={`/courses/${course.id}`}>
+              <Link href={`/courses/${course.id}`} key={course.id}>
                 <div
                   key={course.title}
                   className="h-96 w-96 bg-slate-100 flex flex-col cursor-pointer relative rounded-md shrink-0"
@@ -57,6 +57,7 @@ const Home = async () => {
                   <div>
                     <Image
                       src={course?.img}
+                      alt=""
                       height={300}
                       width={300}
                       className="object-cover rounded-md p-2 w-96 h-60 mb-3"

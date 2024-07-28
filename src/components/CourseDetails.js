@@ -48,6 +48,7 @@ const CourseDetails = ({ course }) => {
               src="/star.png"
               key={index}
               height={200}
+              alt=""
               width={200}
               className="w-8 h-8 mb-2"
             />
@@ -67,6 +68,7 @@ const CourseDetails = ({ course }) => {
               src="https://i.pinimg.com/564x/40/31/00/403100c729d0ef4551aeadfa57d9cbf7.jpg"
               height={60}
               width={60}
+              alt=""
               className="rounded-full"
             />
           </div>
