@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { getCourse } from "@/lib/data";
+import { getCourses } from "@/lib/data";
+import Link from "next/link";
 
 const Home = async () => {
-  const courses = await getCourse();
+  const courses = await getCourses();
   return (
     <div className="mt-16 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
       <div className="flex items-center justify-around">
@@ -48,37 +49,39 @@ const Home = async () => {
         <div className="mt-10 w-full overflow-x-auto scrollbar-hide">
           <div className="flex gap-4 py-4">
             {courses.map((course) => (
-              <div
-                key={course.title}
-                className="h-96 w-96 bg-slate-100 flex flex-col cursor-pointer relative rounded-md shrink-0"
-              >
-                <div>
-                  <Image
-                    src={course?.img}
-                    height={300}
-                    width={300}
-                    className="object-cover rounded-md p-2 w-96 h-60 mb-3"
-                  />
-                </div>
-                <div className="ml-4 leading-loose">
-                  <p className="text-slate-500">
-                    Updated {course.updated.substring(0, 10)}
-                  </p>
-                  <p className="text-black font-bold">{course.title}</p>
-                  <div className="flex gap-3">
-                    {Array.from({ length: course.stars }).map((_, index) => (
-                      <Image
-                        src="/star.png"
-                        key={index}
-                        height={100}
-                        width={100}
-                        className="w-6 h-6 mb-2"
-                      />
-                    ))}
+              <Link href={`/courses/${course.id}`}>
+                <div
+                  key={course.title}
+                  className="h-96 w-96 bg-slate-100 flex flex-col cursor-pointer relative rounded-md shrink-0"
+                >
+                  <div>
+                    <Image
+                      src={course?.img}
+                      height={300}
+                      width={300}
+                      className="object-cover rounded-md p-2 w-96 h-60 mb-3"
+                    />
                   </div>
-                  <p className="text-slate-700 mb-3">Free</p>
+                  <div className="ml-4 leading-loose">
+                    <p className="text-slate-500">
+                      Updated {course.updated.substring(0, 10)}
+                    </p>
+                    <p className="text-black font-bold">{course.title}</p>
+                    <div className="flex gap-3">
+                      {Array.from({ length: course.stars }).map((_, index) => (
+                        <Image
+                          src="/star.png"
+                          key={index}
+                          height={100}
+                          width={100}
+                          className="w-6 h-6 mb-2"
+                        />
+                      ))}
+                    </div>
+                    <p className="text-slate-700 mb-3">Free</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

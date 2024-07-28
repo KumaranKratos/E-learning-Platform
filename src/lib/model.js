@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const courseSchema = mongoose.Schema(
+const courseSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -27,14 +27,13 @@ const courseSchema = mongoose.Schema(
     },
     InstructorName: {
       type: String,
-      required: true,
     },
     desc: {
       type: String,
     },
-    status: {
+    progress: {
       type: Number,
-      required: true,
+      default: 0,
     },
     completed: {
       type: Boolean,
@@ -51,5 +50,22 @@ const courseSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    default: "",
+    unique: true,
+  },
+  bio: {
+    type: String,
+    default: "",
+  },
+  location: {
+    type: String,
+    default: "",
+  },
+});
+
 export const Course =
   mongoose.models?.Course || mongoose.model("Course", courseSchema);
+export const User = mongoose.models?.User || mongoose.model("User", userSchema);
